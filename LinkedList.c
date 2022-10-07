@@ -83,9 +83,42 @@ int removeFront(struct Node *root){
 	}
 
 	return value;
-
-
 }
+
+
+void insertBack(int value,struct Node *root){
+
+	if(!root->value){
+		root->value = value;
+	}
+	else{	
+		struct Node *node = (struct Node*) malloc(sizeof(struct Node));
+
+		node->value = root->value;
+		root->value = value;
+		
+		node->next = root->next;
+		root->next = node;
+	}
+}
+
+
+
+int removeBack(struct Node *root){
+	int value;
+	if(!root->next){
+		value = root->value;
+		root->value = NULL;
+		return value;
+	}else{
+		value = root->value;
+		*root = *root->next;
+		return value;
+	}
+}
+
+
+
 
 
 		
@@ -114,16 +147,13 @@ void main(){
 	insertFront(2021,root);
 	insertFront(3002,root);
 	insertFront(2134,root);
-	printf("o valor retirado foi : %d, ",removeFront(root) );
-	printf("o valor retirado foi : %d, ",removeFront(root) );
-	printf("o valor retirado foi : %d, ",removeFront(root) );
-
+	removeBack(root);
+	removeBack(root);
 	
 
 
 
 	struct Node *iterator = root;
-	printf("sobraram na fila os numeros;");
 	while(iterator){
 		printf("%d, ",iterator->value);
 		iterator = iterator->next;
